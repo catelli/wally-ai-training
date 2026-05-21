@@ -55,3 +55,23 @@ Thumbs.db
 .env
 .env.*
 .cursor/
+
+# Project artifacts
+runs/
+*.pt
+*.pth
+*.onnx
+
+# Data (keep structure, ignore assets)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/datasets/wally/images/**/*
+!data/datasets/wally/images/**/.gitkeep
+data/datasets/wally/labels/**/*
+!data/datasets/wally/labels/**/.gitkeep
+data/datasets/wally_tiles/images/**/*
+!data/datasets/wally_tiles/images/**/.gitkeep
+data/datasets/wally_tiles/labels/**/*
+!data/datasets/wally_tiles/labels/**/.gitkeep

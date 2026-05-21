@@ -1,0 +1,12 @@
+weights: runs/wally_tiles_train/weights/best.pt
+source: data/datasets/wally/images/test
+imgsz: 256
+conf: 0.15
+iou: 0.45
+device: null
+save: true
+project: runs
+name: wally_tiled_predict
+tile_size: 256
+tile_overlap: 64
+merge_iou: 0.45

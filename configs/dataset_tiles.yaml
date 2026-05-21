@@ -1,0 +1,9 @@
+path: data/datasets/wally_tiles
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: wally
+
+nc: 1

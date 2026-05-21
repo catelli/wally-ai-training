@@ -61,6 +61,68 @@ def predict(
     typer.echo("Prediction finished.")
 
 
+@app.command("import-waldo-tiles")
+def import_waldo_tiles(
+    source: Path = typer.Argument(
+        ...,
+        help="Path to wally/Hey-Waldo root (must contain 256/waldo and 256/notwaldo).",
+    ),
+    patch_size: int = typer.Option(256, "--patch-size", help="Tile folder size (64, 128, 256)."),
+    max_negative_ratio: float = typer.Option(
+        3.0,
+        "--max-negative-ratio",
+        help="Max notwaldo tiles per waldo tile (class balance).",
+    ),
+    val_ratio: float = typer.Option(0.15, "--val-ratio"),
+    test_ratio: float = typer.Option(0.15, "--test-ratio"),
+    seed: int = typer.Option(42, "--seed"),
+    overwrite: bool = typer.Option(False, "--overwrite"),
+) -> None:
+    """Import 256px waldo/notwaldo tiles for training (Medium tiled approach)."""
+    from wally_ai_search.data.waldo_tiles_import import import_waldo_tiles_dataset
+
+    stats = import_waldo_tiles_dataset(
+        waldo_root=source,
+        patch_size=patch_size,
+        max_negative_ratio=max_negative_ratio,
+        val_ratio=val_ratio,
+        test_ratio=test_ratio,
+        seed=seed,
+        overwrite=overwrite,
+    )
+    typer.echo(
+        f"Imported {stats['total']} tiles "
+        f"(waldo={stats['positives']}, notwaldo={stats['negatives_used']}/"
+        f"{stats['negatives_available']}): "
+        f"train={stats['train']} ({stats['train_waldo']} waldo), "
+        f"val={stats['val']}, test={stats['test']}."
+    )
+
+
+@app.command("predict-tiled")
+def predict_tiled(
+    source: Optional[str] = typer.Option(
+        None, "--source", "-s", help="Full-scene image path for tiled inference."
+    ),
+    inference_config: Optional[Path] = typer.Option(
+        None, "--inference-config", help="Path to tiled inference YAML config."
+    ),
+) -> None:
+    """Run tiled inference on large images (tile, detect, merge, NMS)."""
+    from wally_ai_search.config.settings import load_yaml
+    from wally_ai_search.pipelines.tiled_predict_pipeline import TiledPredictPipeline
+
+    default_path = Path("configs/inference_tiled.yaml")
+    inf_cfg = (
+        load_yaml(inference_config)
+        if inference_config
+        else load_yaml(default_path)
+    )
+    pipeline = TiledPredictPipeline(inference_config=inf_cfg, source=source)
+    detections = pipeline.run()
+    typer.echo(f"Tiled prediction finished. Detections: {len(detections)}.")
+
+
 @app.command("import-hey-waldo")
 def import_hey_waldo(
     source: Path = typer.Argument(

@@ -56,6 +56,28 @@ wally-ai train
 
 For manual refinement, edit labels under `data/datasets/wally/labels/` or re-annotate in LabelImg / Roboflow and re-run import with `--overwrite`.
 
+## Tiled training (recommended — [Medium article](https://medium.com/swlh/find-waldo-with-yolov2-809db787bbdf))
+
+Waldo is tiny in full-page images; training at `imgsz: 640` on 19 scenes often fails to learn. The article trains on **256×256 tiles** where Waldo fills the tile, then runs **tiled inference** on full scenes.
+
+Import tiles from `~/Downloads/wally` (or Hey-Waldo — same layout: `256/waldo`, `256/notwaldo`):
+
+```bash
+wally-ai import-waldo-tiles ~/Downloads/wally --overwrite
+make train-tiles
+```
+
+Train uses `configs/dataset_tiles.yaml` and `configs/training_tiles.yaml` (`imgsz: 256`, 150 epochs).
+
+Detect Waldo on a full book page:
+
+```bash
+wally-ai predict-tiled -s data/datasets/wally/images/test/hey_waldo_5.jpg \
+  --inference-config configs/inference_tiled.yaml
+```
+
+Output: `runs/wally_tiled_predict/<image>_tiled.jpg`
+
 ## Train
 
 ```bash
