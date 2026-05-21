@@ -43,11 +43,6 @@ htmlcov/
 .tox/
 .nox/
 
-# Project artifacts
-*.pt
-*.pth
-*.onnx
-
 # Jupyter
 .ipynb_checkpoints/
 notebooks/.ipynb_checkpoints/
