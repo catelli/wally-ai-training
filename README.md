@@ -43,9 +43,9 @@ The upstream data comes from the [Hey-Waldo](https://github.com/brendenlake/Hey-
 | **A — Tiled training (recommended)** | `import-waldo-tiles` | `dataset_tiles.yaml` + `training_tiles.yaml` | `256/waldo` and `256/notwaldo` patches | Learning Waldo appearance at **256×256**; detect on full scenes via `predict-tiled` |
 | **B — Full-scene training (optional)** | `import-hey-waldo` | `dataset.yaml` + `training.yaml` | `original-images/` + grid labels from `256/waldo/` filenames | Direct bbox prediction on whole pages (often **fails** with default settings) |
 
-### Strategy A — Tiled training (Medium article approach)
+### Strategy A — Tiled training 
 
-Based on [Find Waldo with YOLOv2](https://medium.com/swlh/find-waldo-with-yolov2-809db787bbdf): train on **256×256 crops** where positive `waldo/` tiles contain Waldo filling the frame. At inference time, run the same tile size over the full scene, shift boxes to global coordinates, and apply NMS.
+Train on **256×256 crops** where positive `waldo/` tiles contain Waldo filling the frame. At inference time, run the same tile size over the full scene, shift boxes to global coordinates, and apply NMS.
 
 **Why it works:** In a typical Hey-Waldo page (~2800×1760 px), a 256×256 Waldo cell is roughly **9% × 14%** of the image. YOLO at `imgsz: 640` still sees Waldo as a very small object (~40×40 px effective), which is hard to learn from only **19 scenes**. Tiles make Waldo occupy most of the training image.
 
@@ -607,6 +607,5 @@ Layers (see also `.cursor/rules/wally-ai-search.mdc`):
 
 ## References
 
-- [Hey-Waldo dataset](https://github.com/brendenlake/Hey-Waldo)
-- [Find Waldo with YOLOv2 (Medium)](https://medium.com/swlh/find-waldo-with-yolov2-809db787bbdf)
+- [Hey-Waldo dataset](https://www.kaggle.com/datasets/residentmario/wheres-waldo)
 - [Ultralytics YOLOv8 docs](https://docs.ultralytics.com/)
