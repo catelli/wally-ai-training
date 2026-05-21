@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any
 
 from wally_ai_search.config.paths import ProjectPaths, get_project_paths

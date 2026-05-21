@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from wally_ai_search.models.evaluator import YoloEvaluator
 from wally_ai_search.models.predictor import YoloPredictor
 from wally_ai_search.models.trainer import YoloTrainer

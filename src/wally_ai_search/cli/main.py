@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 from typing import Optional
 
@@ -180,5 +182,9 @@ def evaluate(
     typer.echo("Evaluation finished.")
 
 
-if __name__ == "__main__":
+def cli() -> None:
     app()
+
+
+if __name__ == "__main__":
+    cli()

@@ -7,7 +7,7 @@ name = "wally-ai-search"
 version = "0.1.0"
 description = "Train, evaluate, and run YOLO models for Wally character detection"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Legitimuz" }]
 dependencies = [
@@ -34,7 +34,7 @@ dev = [
 ]
 
 [project.scripts]
-wally-ai = "wally_ai_search.cli.main:app"
+wally-ai = "wally_ai_search.cli.main:cli"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wally_ai_search"]

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 from wally_ai_search.utils.image_utils import list_images

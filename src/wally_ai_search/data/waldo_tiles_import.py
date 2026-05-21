@@ -144,23 +144,23 @@ def import_waldo_tiles_dataset(
         "total": len(all_samples),
     }
 
-    for split_name, split_samples in splits.items():
+    for split_name, split_records in splits.items():
         images_dir = dataset_root / "images" / split_name
         labels_dir = dataset_root / "labels" / split_name
         images_dir.mkdir(parents=True, exist_ok=True)
 
-        for sample in split_samples:
+        for sample in split_records:
             copy_tile_sample(sample, images_dir, labels_dir, overwrite)
 
-        waldo_count = sum(1 for s in split_samples if s.is_waldo)
-        stats[split_name] = len(split_samples)
+        waldo_count = sum(1 for s in split_records if s.is_waldo)
+        stats[split_name] = len(split_records)
         stats[f"{split_name}_waldo"] = waldo_count
         logger.info(
             "Split {}: {} tiles ({} waldo, {} notwaldo)",
             split_name,
-            len(split_samples),
+            len(split_records),
             waldo_count,
-            len(split_samples) - waldo_count,
+            len(split_records) - waldo_count,
         )
 
     manifest_dir = project_paths.raw / dataset_name
