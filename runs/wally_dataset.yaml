@@ -1,4 +1,4 @@
-path: C:\Users\Administrador\Documents\legitimuz\wally-ai-training\data\datasets\wally
+path: C:\Users\Administrador\Documents\legitimuz\wally-ai-training\data\datasets\wally_tiles
 train: images/train
 val: images/val
 test: images/test
