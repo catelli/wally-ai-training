@@ -44,7 +44,6 @@ htmlcov/
 .nox/
 
 # Project artifacts
-runs/
 *.pt
 *.pth
 *.onnx
