@@ -49,16 +49,6 @@ runs/
 *.pth
 *.onnx
 
-# Data (keep structure, ignore raw assets)
-data/raw/*
-!data/raw/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
-data/datasets/wally/images/**/*
-!data/datasets/wally/images/**/.gitkeep
-data/datasets/wally/labels/**/*
-!data/datasets/wally/labels/**/.gitkeep
-
 # Jupyter
 .ipynb_checkpoints/
 notebooks/.ipynb_checkpoints/
@@ -70,3 +60,4 @@ Thumbs.db
 # Environment secrets
 .env
 .env.*
+.cursor/
