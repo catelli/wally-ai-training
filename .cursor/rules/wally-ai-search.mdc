@@ -1,0 +1,133 @@
+---
+description: Architecture, quality, and development rules for the wally-ai-search Python + YOLO project.
+globs:
+  - "**/*.py"
+  - "**/*.yaml"
+  - "**/*.yml"
+  - "**/*.json"
+  - "**/*.md"
+alwaysApply: true
+---
+
+# Wally AI Search — Python + YOLO
+
+This project is named `wally-ai-search`.
+
+The main goal is to train, evaluate, and run computer vision models to detect the Wally character in images using Python and YOLO.
+
+## Core stack
+
+Prefer:
+
+- Python 3.11+
+- PyTorch
+- Ultralytics YOLO
+- OpenCV
+- Pillow
+- NumPy
+- Pydantic
+- PyYAML
+- Rich or Loguru for logging
+- pytest for tests
+- ruff for lint/format
+- mypy for static typing when it adds value
+
+## Required architecture
+
+Organize the project in clear layers.
+
+Recommended layout:
+
+```txt
+wally-ai-search/
+  src/
+    wally_ai_search/
+      __init__.py
+
+      config/
+        __init__.py
+        settings.py
+        paths.py
+
+      data/
+        __init__.py
+        dataset.py
+        annotations.py
+        augmentation.py
+        split.py
+        validation.py
+
+      models/
+        __init__.py
+        yolo_model.py
+        trainer.py
+        predictor.py
+        evaluator.py
+
+      pipelines/
+        __init__.py
+        train_pipeline.py
+        predict_pipeline.py
+        evaluate_pipeline.py
+
+      services/
+        __init__.py
+        image_service.py
+        detection_service.py
+
+      utils/
+        __init__.py
+        logger.py
+        filesystem.py
+        image_utils.py
+        metrics.py
+
+      cli/
+        __init__.py
+        main.py
+
+  configs/
+    dataset.yaml
+    training.yaml
+    inference.yaml
+
+  data/
+    raw/
+    processed/
+    datasets/
+      wally/
+        images/
+          train/
+          val/
+          test/
+        labels/
+          train/
+          val/
+          test/
+
+  runs/
+  notebooks/
+  tests/
+  scripts/
+  pyproject.toml
+  README.md
+```
+
+## Language and comments
+
+All code, identifiers, functions, classes, variables, filenames, modules, logs, errors, CLI commands, docstrings, and technical documentation generated for this project must be written in English.
+
+Do not write comments in the code unless they are strictly necessary to explain a complex business rule, mathematical logic, model-training decision, or non-obvious technical constraint.
+
+Avoid obvious comments.
+
+Bad examples:
+
+```python
+# Create user
+user = create_user()
+
+# Loop through images
+for image in images:
+    process(image)
+```

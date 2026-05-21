@@ -1,0 +1,12 @@
+weights: runs/wally_train/weights/best.pt
+source: data/datasets/wally/images/test
+imgsz: 640
+conf: 0.25
+iou: 0.45
+device: null
+save: true
+save_txt: false
+save_conf: false
+project: runs
+name: wally_predict
+show: false
